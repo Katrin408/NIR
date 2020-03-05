@@ -1,0 +1,35 @@
+import matplotlib.pyplot as plt
+import random
+
+
+N=11
+M=10000
+Prob = []
+p=0
+
+
+while p<=(1/N):    
+    Prob.append(p)
+    p+=0.01
+  
+
+T_sr=[]
+for i in range(len(Prob)):
+    Que = []
+    for j in range(M):
+        sl = []  
+        for k in range(N):
+            sl.append(random.choices([1, 0], weights = [Prob[i],1-Prob[i]])[0])
+        sum_oj = sum(sl)
+        if len(Que) == 0:
+            Que.append(0)
+        elif Que[j-1] <= 0 :
+            Que.append(sum_oj)
+        else:
+            Que.append(Que[j-1]-1+sum_oj)
+    if Prob[i] == 0:
+        T_sr.append(0)
+    else:
+        T_sr.append(sum(Que)/Prob[i])
+
+plt.plot(Prob, T_sr, color='blue')
