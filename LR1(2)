@@ -1,0 +1,26 @@
+N=11
+M=500
+Prob = []
+p=0.005
+
+
+while p<=(1/N):    
+    Prob.append(p)
+    p+=0.005
+  
+
+T_sr=[]
+
+for i in range(len(Prob)):
+    Que = []
+    colliz = 0
+    all_z = 0
+    for j in range(M):
+        sl = []  
+        for k in range(N):
+            sl.append(random.choices([1, 0], weights = [Prob[i],1-Prob[i]])[0])
+        if sum(sl)>1:
+            colliz+=sum(sl)
+        all_z +=sum(sl)
+    T_sr.append(colliz/all_z)
+plt.plot(Prob, T_sr, color='blue') 
